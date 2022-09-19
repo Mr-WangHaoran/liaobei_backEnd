@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 官网解释since 3.5.9 value="LOG4J"已废弃，最新支持为LOG4J2,本版本使用mybatis3.5.2,所以不能用LOG4J2 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    
+    <typeAliases>
+        <package name="com.liaobei.pojo"/>
+        <package name="com.liaobei.povo"/>
+    </typeAliases>
+    <!--
+     <mappers>
+       <mapper class="com.liaobei.dao.UserMapper"/>
+       <mapper resource="com/liaobei/dao/UserMapper.xml"/>
+       <package name="com.liaobei.dao"/>
+    </mappers>
+    -->
+</configuration>

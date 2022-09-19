@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liaobei.dao.inter.UserMapper">
+
+    <sql id="user_field">
+        username,sex,telNumber,password,state,height,address,avatar,birth,desc,age
+    </sql>
+    <sql id="user_reg_field">
+        username,sex,telNumber,password
+    </sql>
+
+    <insert id="insertOpenId">
+        insert into user(openid) value (#{openId}) where id=#{id}
+    </insert>
+
+    <insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        insert into user(<include refid="user_reg_field"/>) value (#{username},#{sex},#{telNumber},#{password})
+    </insert>
+
+    <update id="updateUserData" parameterType="user">
+        update user
+        <set>
+            <if test="username!=null and username!=''">
+                username = #{username},
+            </if>
+            <if test="sex!=null and sex!=''">
+                sex = #{sex},
+            </if>
+            <if test="state!=null and state!=''">
+                state = #{state},
+            </if>
+            <if test="password!=null and password!=''">
+                password = #{password},
+            </if>
+            <if test="height!=null and height!=''">
+                height = #{height},
+            </if>
+            <if test="age!=null and age!=''">
+                age = #{age},
+            </if>
+            <if test="address!=null and address!=''">
+                address = #{address},
+            </if>
+            <if test="birth!=null and birth!=''">
+                birth = #{birth},
+            </if>
+            <if test="desc!=null and desc!=''">
+                desc = #{desc},
+            </if>
+            <if test="avatar!=null and avatar!=''">
+                avatar = #{avatar},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <select id="findFriendsByIds" parameterType="list" resultType="user">
+        select * from user where id in 
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+
+    </select>
+</mapper>
